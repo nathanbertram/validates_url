@@ -13,7 +13,9 @@ module ActiveModel
 
       def validate_each(record, attribute, value)
         schemes = [*options.fetch(:schemes)].map(&:to_s)
-
+        
+        value = "http://#{value}" unless value =~ /:\/\// || value !~ /[.]/
+        
         if URI::regexp(schemes).match(value)
           begin
             URI.parse(value)

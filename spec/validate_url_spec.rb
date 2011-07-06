@@ -31,11 +31,11 @@ describe "URL validation" do
       @user.should_not be_valid
     end
 
-    it "should not allow an url without scheme" do
+    it "should allow an url without scheme and assume it's http" do
       @user.homepage = "www.example.com"
-      @user.should_not be_valid
+      @user.should be_valid
     end
-
+    
     it "should allow an url with http" do
       @user.homepage = "http://localhost"
       @user.should be_valid
